@@ -7,6 +7,7 @@ import javax.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -24,7 +25,7 @@ import my.smvc.hib.api.service.RoleService;
 import my.smvc.hib.api.service.UserService;
 
 @RestController
-@RequestMapping("/secure/api")
+@RequestMapping("/secure")
 public class AdminOpsController {
 
 	private static final String EMPLOYEE_WITH_ID = "Employee with id ";
@@ -37,8 +38,10 @@ public class AdminOpsController {
 
 	@Autowired
 	EmployeeService employeeServiceImpl;
+	
 
 	// http://localhost:8080/api/employees/3
+	@PreAuthorize("hasAnyRole('ADMIN')")
 	@DeleteMapping(path = "/employees/{id}")
 	public ResponseEntity<String> deleteEmployee(@PathVariable(required = true, name = "id") Long id) {
 
@@ -58,6 +61,7 @@ public class AdminOpsController {
 //	}
 	
 	//ADD LIST OF NEW EMPLOYEES - IF 1 EMPLOYEE THEN PASS 1 OTHERWISE LIST OF EMPLOYEES
+	@PreAuthorize("hasAnyRole('ADMIN')")
 	@PostMapping(path = "/employees")
 	public String addEmployees(@RequestBody List<Employee> employees) {
 
@@ -69,6 +73,7 @@ public class AdminOpsController {
 	
 
 	// PUT Employee
+	@PreAuthorize("hasAnyRole('ADMIN')")
 	@PutMapping(path = "/employees")
 	public ResponseEntity<Employee> updateEmployee(@RequestBody Employee employee) {
 
@@ -80,21 +85,22 @@ public class AdminOpsController {
 		return new ResponseEntity<Employee>(updatedEmployee, HttpStatus.OK);
 	}
 
-//	@PreAuthorize("hasAnyRole('ADMIN')")
+	@PreAuthorize("hasAnyRole('ADMIN')")
 	@PostMapping("/user")
 	public ResponseEntity<User> addUserByAdmin(@RequestBody User user) {
-
+		
 		User savedUser = userServiceImpl.saveUser(user);
 		return new ResponseEntity<User>(savedUser, HttpStatus.OK);
 	}
 
-//	@PreAuthorize("hasAnyRole('ADMIN')")
+	@PreAuthorize("hasAnyRole('ADMIN')")
 	@PostMapping("/role")
 	public ResponseEntity<Role> addRoleByAdmin(@RequestBody Role role) {
 		Role savedRole = roleServiceImpl.saveRole(role);
 		return new ResponseEntity<Role>(savedRole, HttpStatus.OK);
 	}
 
+//	@PreAuthorize("hasAnyRole('ADMIN')")
 	@GetMapping("/hello")
 	public String hello() {
 		return "hello";

@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.TreeSet;
 
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -11,17 +13,16 @@ import my.smvc.hib.api.model.Employee;
 import my.smvc.hib.api.model.Role;
 import my.smvc.hib.api.model.User;
 
-public class TestCode {
+public class RoughCode {
 
 	public static ObjectMapper objMapper = new ObjectMapper();
 
 	public static void main(String... strings) {
 		
 		
-//		BCryptPasswordEncoder bcrupt = new BCryptPasswordEncoder();
-		
-//		String encode = bcrupt.encode("password");
-//		System.out.println("'" + encode + "'");
+		BCryptPasswordEncoder bcrupt = new BCryptPasswordEncoder();
+		String encode = bcrupt.encode("password");
+		System.out.println("'" + encode + "'");//$2a$10$riFxrsP8fAsyKLnofi08h.7AwIxCIp9YAdHAZm2BE/Nx1S/nKUpL6
 
 		//==USER
 		User user = new User();
