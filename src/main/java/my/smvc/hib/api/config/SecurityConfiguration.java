@@ -11,13 +11,12 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 @Configuration
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
-	
-	
+
 	@Autowired
 	public void configureGlobalSecurity(AuthenticationManagerBuilder auth) throws Exception {
 		auth.inMemoryAuthentication().passwordEncoder(getPasswordEncoder())
-			.withUser(User.withUsername("ADMIN").password(getPasswordEncoder().encode("password")).roles("ADMIN"))
-			.withUser(User.withUsername("USER").password(getPasswordEncoder().encode("password")).roles("USER"));
+				.withUser(User.withUsername("ADMIN").password(getPasswordEncoder().encode("password")).roles("ADMIN"))
+				.withUser(User.withUsername("USER").password(getPasswordEncoder().encode("password")).roles("USER"));
 
 	}
 
@@ -31,26 +30,22 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	 */
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		
-		
+
 		// Security role
 		http
-		.httpBasic()
-		.and()
+		.httpBasic().and()
 		.authorizeRequests()
 		.antMatchers("/secure/**").hasRole("ADMIN")
 		.antMatchers("/api/**").hasAnyRole("ADMIN", "USER")
 		.and()
-//		.antMatchers("/").permitAll().and().formLogin();
-
 		.csrf().disable()
 		.formLogin().disable();
+		
+		
 		http.headers().frameOptions().disable();
-		
-		
-		
+
 		// ONLY ADMIN CAN ADD OR DELETE STUDENT
-		//USER  (USED BY STUDENTS CAN VIEW AND UPDATE AND SAVE)
+		// USER (USED BY STUDENTS CAN VIEW AND UPDATE AND SAVE)
 //		http.authorizeRequests().antMatchers("/delete-student", "/add-student").hasRole("ADMIN") 
 //		
 //				.antMatchers("/list-students", "/update-student", "/save-student").hasAnyRole("ADMIN", "USER") 

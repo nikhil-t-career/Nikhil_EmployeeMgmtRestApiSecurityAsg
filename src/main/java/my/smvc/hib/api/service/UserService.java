@@ -1,8 +1,7 @@
 package my.smvc.hib.api.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.password.NoOpPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import my.smvc.hib.api.model.User;
@@ -14,10 +13,10 @@ public class UserService {
 	@Autowired
 	UserRepository userRepo;
 
-//	@Autowired
-//	private BCryptPasswordEncoder passwordEncoder;
+	@Autowired
+	private BCryptPasswordEncoder passwordEncoder;
 	
-	private PasswordEncoder passwordEncoder = NoOpPasswordEncoder.getInstance();
+//	private PasswordEncoder passwordEncoder = NoOpPasswordEncoder.getInstance();
 
 	public User saveUser(User user) {
 

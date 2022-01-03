@@ -3,6 +3,8 @@ package my.smvc.hib.api.service;
 import java.util.List;
 import java.util.Optional;
 
+import javax.persistence.EntityNotFoundException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
@@ -17,34 +19,30 @@ public class EmployeeService {
 	EmployeeRepository employeeRepo;
 
 	// 1 Add New or Update Employee
-	public Employee addEmployee(Employee employee) {
-		return employeeRepo.save(employee);
+	public List<Employee> addEmployee(List<Employee> employee) {
+		return employeeRepo.saveAll(employee);
 	}
-	
-	
+
 	public Employee updateEmployee(Employee employee) {
-		
+
 		Optional<Employee> optionalEmployee = employeeRepo.findById(employee.getId());
-		
-		if(optionalEmployee.isPresent())
-		{
+
+		if (optionalEmployee.isPresent()) {
 			Employee existingEmp = optionalEmployee.get();
-			
-			if(employee.getEmail() != null) 
+
+			if (employee.getEmail() != null)
 				existingEmp.setEmail(employee.getEmail());
-			if(employee.getFirstname() != null) 
+			if (employee.getFirstname() != null)
 				existingEmp.setFirstname(employee.getFirstname());
-			if(employee.getLastname() != null) 
+			if (employee.getLastname() != null)
 				existingEmp.setLastname(employee.getLastname());
-			
+
 			return employeeRepo.save(existingEmp);
-			
+
 		}
-		
+
 		return null;
 	}
-	
-	
 
 	// 2. Get All Employees in DB
 	public List<Employee> getAllEmployees(String sortOrder) {

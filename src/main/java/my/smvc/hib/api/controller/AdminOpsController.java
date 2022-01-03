@@ -63,12 +63,11 @@ public class AdminOpsController {
 	//ADD LIST OF NEW EMPLOYEES - IF 1 EMPLOYEE THEN PASS 1 OTHERWISE LIST OF EMPLOYEES
 	@PreAuthorize("hasAnyRole('ADMIN')")
 	@PostMapping(path = "/employees")
-	public String addEmployees(@RequestBody List<Employee> employees) {
+	public ResponseEntity<List<Employee>> addEmployees(@RequestBody List<Employee> employees) {
 
-		for(Employee e: employees)
-		employeeServiceImpl.addEmployee(e);
+		List<Employee> addedEmployees = employeeServiceImpl.addEmployee(employees);
 
-		return "List of Employees Added";
+		return new ResponseEntity<List<Employee>>(addedEmployees, HttpStatus.OK);
 	}
 	
 
@@ -87,7 +86,7 @@ public class AdminOpsController {
 
 	@PreAuthorize("hasAnyRole('ADMIN')")
 	@PostMapping("/user")
-	public ResponseEntity<User> addUserByAdmin(@RequestBody User user) {
+	public ResponseEntity<User> user(@RequestBody User user) {
 		
 		User savedUser = userServiceImpl.saveUser(user);
 		return new ResponseEntity<User>(savedUser, HttpStatus.OK);
@@ -95,12 +94,12 @@ public class AdminOpsController {
 
 	@PreAuthorize("hasAnyRole('ADMIN')")
 	@PostMapping("/role")
-	public ResponseEntity<Role> addRoleByAdmin(@RequestBody Role role) {
+	public ResponseEntity<Role> userRole(@RequestBody Role role) {
 		Role savedRole = roleServiceImpl.saveRole(role);
 		return new ResponseEntity<Role>(savedRole, HttpStatus.OK);
 	}
 
-//	@PreAuthorize("hasAnyRole('ADMIN')")
+	@PreAuthorize("hasAnyRole('ADMIN')")
 	@GetMapping("/hello")
 	public String hello() {
 		return "hello";

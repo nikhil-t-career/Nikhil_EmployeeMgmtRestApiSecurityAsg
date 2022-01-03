@@ -6,7 +6,7 @@
 	},
 	"item": [
 		{
-			"name": "AddRoleByAdmin",
+			"name": "AddRole",
 			"request": {
 				"auth": {
 					"type": "basic",
@@ -35,7 +35,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8080/secure/api/role",
+					"raw": "http://localhost:8080/secure/role",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -43,7 +43,6 @@
 					"port": "8080",
 					"path": [
 						"secure",
-						"api",
 						"role"
 					]
 				}
@@ -51,16 +50,28 @@
 			"response": []
 		},
 		{
-			"name": "AddUserByAdmin",
+			"name": "AddUser",
 			"request": {
 				"auth": {
-					"type": "basic"
+					"type": "basic",
+					"basic": [
+						{
+							"key": "username",
+							"value": "ADMIN",
+							"type": "string"
+						},
+						{
+							"key": "password",
+							"value": "password",
+							"type": "string"
+						}
+					]
 				},
 				"method": "POST",
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"username\": \"admin2\",\n    \"password\": \"password\",\n    \"email\": \"a@a.com\",\n    \"roles\": [\n        {\n            \"role\": \"ADMIN\"\n        }\n    ]\n}",
+					"raw": "{\n    \"username\": \"adminUser\",\n    \"password\": \"password\",\n    \"email\": \"a@a.com\",\n    \"roles\": [\n        {\n            \"role\": \"ADMIN\"\n        }\n    ]\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -68,7 +79,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8080/secure/api/user",
+					"raw": "http://localhost:8080/secure/user",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -76,7 +87,6 @@
 					"port": "8080",
 					"path": [
 						"secure",
-						"api",
 						"user"
 					]
 				}
@@ -84,13 +94,28 @@
 			"response": []
 		},
 		{
-			"name": "AddEmployeesByAdmin",
+			"name": "AddEmployees",
 			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "password",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "ADMIN",
+							"type": "string"
+						}
+					]
+				},
 				"method": "POST",
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "[\n    {\n        \"id\": 1,\n        \"firstname\": \"Nikhil1\",\n        \"lastname\": \"Thorawade1\",\n        \"email\": \"Nikhil3@a.com\"\n    },\n    {\n        \"id\": 2,\n        \"firstname\": \"Nikhil2\",\n        \"lastname\": \"Thorawade2\",\n        \"email\": \"Nikhil3@a.com\"\n    },\n    {\n        \"id\": 3,\n        \"firstname\": \"Nikhil3\",\n        \"lastname\": \"Thorawade3\",\n        \"email\": \"Nikhil3@a.com\"\n    }\n]",
+					"raw": "[\n    {\n        \"firstname\": \"Nikhil1\",\n        \"lastname\": \"Thorawade1\",\n        \"email\": \"Nikhil1@a.com\"\n    },\n    {\n        \"firstname\": \"Nikhil2\",\n        \"lastname\": \"Thorawade2\",\n        \"email\": \"Nikhil2@a.com\"\n    },\n    {\n        \"firstname\": \"Nikhil3\",\n        \"lastname\": \"Thorawade3\",\n        \"email\": \"Nikhil3@a.com\"\n    }\n]",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -98,7 +123,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8080/secure/api/employees",
+					"raw": "http://localhost:8080/secure/employees",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -106,7 +131,6 @@
 					"port": "8080",
 					"path": [
 						"secure",
-						"api",
 						"employees"
 					]
 				}
@@ -114,13 +138,28 @@
 			"response": []
 		},
 		{
-			"name": "UpdateEmployeeByAdmin",
+			"name": "UpdateEmployee",
 			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "username",
+							"value": "ADMIN",
+							"type": "string"
+						},
+						{
+							"key": "password",
+							"value": "password",
+							"type": "string"
+						}
+					]
+				},
 				"method": "PUT",
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"id\": 1,\n    \"firstname\": \"fname\",\n    \"lastname\": \"fname\"\n}",
+					"raw": "{\n    \"id\": 3,\n    \"firstname\": \"Nikhil3\",\n    \"lastname\": \"Updated\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -128,7 +167,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8080/secure/api/employees",
+					"raw": "http://localhost:8080/secure/employees",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -136,7 +175,6 @@
 					"port": "8080",
 					"path": [
 						"secure",
-						"api",
 						"employees"
 					]
 				}
@@ -144,12 +182,31 @@
 			"response": []
 		},
 		{
-			"name": "DeleteEmployeeByAdmin",
+			"name": "DeleteEmployee",
 			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "username",
+							"value": "ADMIN",
+							"type": "string"
+						},
+						{
+							"key": "password",
+							"value": "password",
+							"type": "string"
+						}
+					]
+				},
 				"method": "DELETE",
 				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
 				"url": {
-					"raw": "http://localhost:8080/secure/api/employees/:id",
+					"raw": "http://localhost:8080/secure/employees/:id",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -157,14 +214,13 @@
 					"port": "8080",
 					"path": [
 						"secure",
-						"api",
 						"employees",
 						":id"
 					],
 					"variable": [
 						{
 							"key": "id",
-							"value": "1"
+							"value": "2"
 						}
 					]
 				}
@@ -174,6 +230,21 @@
 		{
 			"name": "AllEmployees",
 			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "username",
+							"value": "ADMIN",
+							"type": "string"
+						},
+						{
+							"key": "password",
+							"value": "password",
+							"type": "string"
+						}
+					]
+				},
 				"method": "GET",
 				"header": [],
 				"url": {
@@ -194,6 +265,21 @@
 		{
 			"name": "AllEmployeesWithSort",
 			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "username",
+							"value": "ADMIN",
+							"type": "string"
+						},
+						{
+							"key": "password",
+							"value": "password",
+							"type": "string"
+						}
+					]
+				},
 				"method": "GET",
 				"header": [],
 				"url": {
@@ -221,6 +307,21 @@
 		{
 			"name": "GetEmployeesByFirstName",
 			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "username",
+							"value": "ADMIN",
+							"type": "string"
+						},
+						{
+							"key": "password",
+							"value": "password",
+							"type": "string"
+						}
+					]
+				},
 				"method": "GET",
 				"header": [],
 				"url": {
@@ -256,6 +357,21 @@
 		{
 			"name": "GetEmployeeById",
 			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "username",
+							"value": "ADMIN",
+							"type": "string"
+						},
+						{
+							"key": "password",
+							"value": "password",
+							"type": "string"
+						}
+					]
+				},
 				"method": "GET",
 				"header": [],
 				"url": {

@@ -23,7 +23,7 @@ public class CustomUserDetailsService implements UserDetailsService {
 			userDetails = new CustomUserDetails();
 			userDetails.setUser(user);
 		} else {
-			throw new UsernameNotFoundException("User not exist with name : " + username);
+			throw new UsernameNotFoundException("User does not exist with username : " + username);
 		}
 		return userDetails;
 
