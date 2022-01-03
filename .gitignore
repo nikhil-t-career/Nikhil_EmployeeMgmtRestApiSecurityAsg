@@ -27,3 +27,5 @@ Target
 Bin
 .class
 .mvn
+.DS_Store
+.factorypath
